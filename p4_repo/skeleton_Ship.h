@@ -68,16 +68,20 @@ public:
      // may throw Error("Ship cannot move!")
      // may throw Error("Ship cannot go that fast!")
 	virtual void set_destination_position_and_speed(Point destination_position, double speed);
+
 	// Start moving on a course and speed
      // may throw Error("Ship cannot move!")
      // may throw Error("Ship cannot go that fast!");
 	virtual void set_course_and_speed(double course, double speed);
+
 	// Stop moving
      // may throw Error("Ship cannot move!");
 	virtual void stop();
+
 	// dock at an Island - set our position = Island's position, go into Docked state
      // may throw Error("Can't dock!");
 	virtual void dock(Island * island_ptr);
+
 	// Refuel - must already be docked at an island; fill takes as much as possible
      // may throw Error("Must be docked!");
 	virtual void refuel();
@@ -86,10 +90,13 @@ public:
 	// These functions throw an Error exception for this class
     // will always throw Error("Cannot load at a destination!");
 	virtual void set_load_destination(Island *);
+
     // will always throw Error("Cannot unload at a destination!");
 	virtual void set_unload_destination(Island *);
+
     // will always throw Error("Cannot attack!");
 	virtual void attack(Ship * in_target_ptr);
+
     // will always throw Error("Cannot attack!");
 	virtual void stop_attack();
 
@@ -101,6 +108,7 @@ protected:
 	// future projects may need additional protected members
 
 	double get_maximum_speed() const;
+
 	// return pointer to the Island currently docked at, or nullptr if not docked
 	Island* get_docked_Island() const;
 
