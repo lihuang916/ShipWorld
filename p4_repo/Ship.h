@@ -23,7 +23,12 @@ be kept together with your .cpp file for the component.
 You should delete this comment.
 */
 
+#include "Sim_object.h"
+#include "Track_base.h"
 
+class Island;
+
+class Ship : public Sim_object, private Track_base {
 public:
 	// initialize, then output constructor message
 	Ship(const std::string& name_, Point position_, double fuel_capacity_, 
@@ -106,7 +111,6 @@ public:
 		
 protected:
 	// future projects may need additional protected members
-
 	double get_maximum_speed() const;
 
 	// return pointer to the Island currently docked at, or nullptr if not docked
@@ -114,12 +118,21 @@ protected:
 
 private:
 	double fuel;						// Current amount of fuel
+        double fuel_capacity;
+        double maximum_speed;
 	double fuel_consumption;			// tons/nm required
+        int resistance;
 	Point destination;					// Current destination if any
 
 	// Updates position, fuel, and movement_state, assuming 1 time unit (1 hr)
 	void calculate_movement();
 
+        enum Ship_State {DOCKED, STOPPED, MOVING_TO_POSITION, MOVING_ON_COURSE, DEAD_IN_THE_WATER, SINKING, SUNK, ON_THE_BOTTOM};
+        Ship_State ship_state;
+        
 	// disallow copy/move, construction or assignment
-
-
+        Ship(const Ship&);
+        Ship& operator=(const Ship&);
+        Ship(const Ship&&);
+        Ship& operator=(const Ship&&);
+};
