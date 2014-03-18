@@ -18,6 +18,9 @@ If any protected or private members are shown here, then your class must also ha
 You should delete this comment.
 */
 
+#include "Ship.h"
+
+class Tanker : public Ship {
 public:
 	// initialize, the output constructor message
 	Tanker(const std::string& name_, Point position_);
@@ -42,3 +45,7 @@ public:
 	void update() override;
 	void describe() const override;
 
+private:
+    int cargo_capacity;
+    int cargo;
+};

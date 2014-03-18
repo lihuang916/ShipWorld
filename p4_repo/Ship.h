@@ -23,6 +23,9 @@ be kept together with your .cpp file for the component.
 You should delete this comment.
 */
 
+#ifndef SHIP_H
+#define SHIP_H
+
 #include "Sim_object.h"
 #include "Track_base.h"
 
@@ -136,3 +139,5 @@ private:
         Ship(const Ship&&);
         Ship& operator=(const Ship&&);
 };
+
+#endif

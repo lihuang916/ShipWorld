@@ -19,6 +19,15 @@ If any protected or private members are shown here, then your class must also ha
 You should delete this comment.
 */
 
+#include <vector>
+#include <string>
+
+class Sim_object;
+class Island;
+class Ship;
+class View;
+struct Point;
+
 // Declare the global model pointer
 class Model;
 extern Model* g_Model_ptr;
@@ -40,20 +49,25 @@ public:
 
 	// is there such an island?
 	bool is_island_present(const std::string& name) const;
+
 	// add a new island to the lists
 	void add_island(Island*);
+
 	// will throw Error("Island not found!") if no island of that name
 	Island* get_island_ptr(const std::string& name) const;
 
 	// is there such an ship?
 	bool is_ship_present(const std::string& name) const;
+
 	// add a new ship to the list, and update the view
 	void add_ship(Ship*);
+
 	// will throw Error("Ship not found!") if no ship of that name
 	Ship* get_ship_ptr(const std::string& name) const;
 	
 	// tell all objects to describe themselves
 	void describe() const;
+
 	// increment the time, and tell all objects to update themselves
 	void update();	
 	
@@ -65,20 +79,28 @@ public:
 	// Attaching a View adds it to the container and causes it to be updated
     // with all current objects'location (or other state information.
 	void attach(View*);
+
 	// Detach the View by discarding the supplied pointer from the container of Views
     // - no updates sent to it thereafter.
 	void detach(View*);
 	
     // notify the views about an object's location
 	void notify_location(const std::string& name, Point location);
+
 	// notify the views that an object is now gone
 	void notify_gone(const std::string& name);
-
 	
 private:
 	int time;		// the simulated time
-
+    std::vector<Sim_object* > all_objects;
+    std::vector<Island* > islands;
+    std::vector<Ship* > ships;
+ //   std::vector<View* > views;
 
 	// disallow copy/move construction or assignment
+    Model(const Model&);
+    Model& operator=(const Model&);
+ //   Model(const Model&&);
+ //   Model& operator=(const Model&&);
 };
 
